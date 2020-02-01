@@ -15,7 +15,6 @@
 
 
     function placeInRegion(el) {
-        console.log(el.style);
         let parent = el.parentNode;
 
         let wrapper = document.createElement("div");
@@ -26,9 +25,6 @@
         wrapper.style.setProperty("height", el.style.getPropertyValue("height"));
         wrapper.style.setProperty("display", "inline-block");
         wrapper.innerHTML = "<p class='abb_text'  style='" + window.ABB_config.textStyle + "'>" + window.ABB_config.text + "</p>";
-
-        console.log(wrapper);
-        console.log(wrapper.style);
 
         if (window.ABB_config.insertPosition === "before") {
             parent.insertBefore(wrapper, el);
@@ -45,7 +41,6 @@
             let matches = document.querySelectorAll(selector);
             for (let i = 0; i < matches.length; i++) {
                 let match = matches[i];
-                console.log(match);
                 placeInRegion(match);
             }
         }
