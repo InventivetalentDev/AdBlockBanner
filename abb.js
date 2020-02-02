@@ -41,11 +41,16 @@
             let matches = document.querySelectorAll(selector);
             for (let i = 0; i < matches.length; i++) {
                 let match = matches[i];
-                placeInRegion(match);
+                if (isEmpty(match)) {
+                    placeInRegion(match);
+                }
             }
         }
     }
 
+    function isEmpty(el) {
+        return el.childElementCount <= 0;
+    }
 
     setTimeout(checkRegions, window.ABB_config.delay);
 
