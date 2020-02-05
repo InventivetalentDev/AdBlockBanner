@@ -12,7 +12,7 @@ Tiny script to detect ad blockers and display a custom message in ad regions
         selectors: [".adsbygoogle"], // Ad Region selectors - should be the element that usually contains the ad body
     }
 </script>
-<script src="https://unpkg.com/adblockbanner@1.0.1/abb.min.js"></script>
+<script src="https://unpkg.com/adblockbanner@1.0.2/abb.min.js"></script>
 ```
 
 ```
