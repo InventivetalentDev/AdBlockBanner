@@ -9,7 +9,8 @@
             wrapperStyle: 'border-radius: 5px',
             textStyle: 'text-align: center; font-size: 2rem; font-family:',
             delay: 2000,
-            insertPosition: 'before' // before, after, inside
+            insertPosition: 'before', // before, after, inside
+            enableAnalytics: false,// Toggle Google Analytics - will send a custom event for adblock_on or adblock_off
         }, config);
     window.ABB_config = config;
 
@@ -36,6 +37,7 @@
     }
 
     function checkRegions() {
+        let adblockEnabled = false;
         for (let j = 0; j < window.ABB_config.selectors.length; j++) {
             let selector = window.ABB_config.selectors[j];
             let matches = document.querySelectorAll(selector);
@@ -43,16 +45,32 @@
                 let match = matches[i];
                 if (isEmpty(match)) {
                     placeInRegion(match);
+                    adblockEnabled = true;
                 }
             }
         }
+        return adblockEnabled;
     }
 
     function isEmpty(el) {
         return el.childElementCount <= 0;
     }
 
-    setTimeout(checkRegions, window.ABB_config.delay);
+    function run() {
+        let adblockEnabled = checkRegions();
+
+        if (config.enableAnalytics && typeof ga === "function") {
+            if (ga.hasOwnProperty("getAll")) {// https://stackoverflow.com/a/40761709/6257838
+                let allTrackers = ga.getAll();
+                if (allTrackers && allTrackers.length > 0) {
+                    allTrackers[0].send("event", "AdBlockBanner", adblockEnabled ? "adblock_on" : "adblock_off");
+                }
+            }
+            ga("send", "event", "AdBlockBanner", adblockEnabled ? "adblock_on" : "adblock_off");
+        }
+    }
+
+    setTimeout(run, window.ABB_config.delay);
 
 
 })(window, document);
