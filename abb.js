@@ -19,27 +19,27 @@
         let parent = el.parentNode;
 
         let wrapper = document.createElement("div");
-        wrapper.style = window.ABB_config.wrapperStyle;
-        wrapper.style.setProperty("background-color", window.ABB_config.backgroundColor);
-        wrapper.style.setProperty("color", window.ABB_config.textColor);
+        wrapper.style = config.wrapperStyle;
+        wrapper.style.setProperty("background-color", config.backgroundColor);
+        wrapper.style.setProperty("color", config.textColor);
         wrapper.style.setProperty("width", el.style.getPropertyValue("width"));
         wrapper.style.setProperty("height", el.style.getPropertyValue("height"));
         wrapper.style.setProperty("display", "inline-block");
-        wrapper.innerHTML = "<p class='abb_text'  style='" + window.ABB_config.textStyle + "'>" + window.ABB_config.text + "</p>";
+        wrapper.innerHTML = "<p class='abb_text'  style='" + config.textStyle + "'>" + config.text + "</p>";
 
-        if (window.ABB_config.insertPosition === "before") {
+        if (config.insertPosition === "before") {
             parent.insertBefore(wrapper, el);
-        } else if (window.ABB_config.insertPosition === "after") {
+        } else if (config.insertPosition === "after") {
             parent.insertBefore(wrapper, el.nextSibling);
-        } else if (window.ABB_config.insertPosition === "inside") {
+        } else if (config.insertPosition === "inside") {
             el.appendChild(wrapper);
         }
     }
 
     function checkRegions() {
         let adblockEnabled = false;
-        for (let j = 0; j < window.ABB_config.selectors.length; j++) {
-            let selector = window.ABB_config.selectors[j];
+        for (let j = 0; j < config.selectors.length; j++) {
+            let selector = config.selectors[j];
             let matches = document.querySelectorAll(selector);
             for (let i = 0; i < matches.length; i++) {
                 let match = matches[i];
@@ -70,7 +70,7 @@
         }
     }
 
-    setTimeout(run, window.ABB_config.delay);
+    setTimeout(run, config.delay);
 
 
 })(window, document);
