@@ -18,6 +18,10 @@
     function placeInRegion(el) {
         let parent = el.parentNode;
 
+        if (parent.classList.contains("abb_parent") && el.classList.contains("abb_has_ad_replacement")) {
+            return;
+        }
+
         let wrapper = document.createElement("div");
         wrapper.style = config.wrapperStyle;
         wrapper.style.setProperty("background-color", config.backgroundColor);
@@ -34,6 +38,8 @@
         } else if (config.insertPosition === "inside") {
             el.appendChild(wrapper);
         }
+
+        parent.classList.add("abb_parent");
 
         el.classList.add("abb_original_ad_region");
         el.classList.add("abb_has_ad_replacement");
