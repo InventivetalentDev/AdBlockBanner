@@ -34,6 +34,9 @@
         } else if (config.insertPosition === "inside") {
             el.appendChild(wrapper);
         }
+
+        el.classList.add("abb_original_ad_region");
+        el.classList.add("abb_has_ad_replacement");
     }
 
     function checkRegions() {
