@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json.schemastore.org/install",
+  "resources": {
+    "body": [
+      {
+        "type": "script",
+        "src": "abb.js"
+      }
+    ]
+  },
+  "options": {
+    "properties": {
+      "text": {
+        "order": 1,
+        "title": "Text",
+        "description": "Text Displayed to Users with AdBlock Enabled",
+        "type": "string",
+        "default": "Hi! Please disable your AdBlocker for this site to keep it running, thanks :)"
+      },
+      "backgroundColor": {
+        "order": 2,
+        "title": "Background Color",
+        "description": "Background Color of the Element",
+        "type": "string",
+        "format": "color",
+        "default": "#e10000"
+      },
+      "textColor": {
+        "order": 3,
+        "title": "Text Color",
+        "description": "Color of the Displayed Text",
+        "type": "string",
+        "format": "color",
+        "default": "#000000"
+      },
+      "position": {
+        "order": 4,
+        "title": "Insert Position",
+        "description": "Where the Replacement Element is Placed in Relation to the Original Ad",
+        "type": "string",
+        "enum": [
+          "before",
+          "after",
+          "inside"
+        ],
+        "default": "before"
+      },
+      "selectors": {
+        "order": 5,
+        "title": "Ad Selectors",
+        "type": "array",
+        "items": {
+          "title": "Selector",
+          "type": "string"
+        },
+        "default": [
+          ".adsbygoogle"
+        ]
+      },
+      "delay": {
+        "order": 6,
+        "title": "Activation Delay",
+        "description": "Delay in milliseconds until the AdBlock checks are run",
+        "type": "integer",
+        "default": 2000
+      },
+      "previewAdblock": {
+        "order":7,
+        "title": "Preview AdBlock",
+        "description": "Preview the Site with AdBlock enabled",
+        "type": "boolean",
+        "default": true
+      },
+      "enableAnalytics": {
+        "order": 8,
+        "title": "Enable Analytics?",
+        "description": "Toggle Google Analytics Event Reporting",
+        "type": "boolean",
+        "default": false
+      },
+      "enableReporting": {
+        "order": 9,
+        "title": "Enable Reporting?",
+        "description": "Toggle Reporting of AdBlocker State to the Dashboard",
+        "type": "boolean",
+        "default": true
+      }
+    }
+  }
+}

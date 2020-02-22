@@ -1,5 +1,7 @@
 (function (window, document) {
-    let config = window.ABB_config || {};
+    'use strict'
+
+    let config = window.ABB_config || INSTALL_OPTIONS || {};
     config = Object.assign({},
         {
             text: "Hi! Please disable your AdBlocker for this site to keep it running, thanks :)", // Text to be displayed
@@ -12,6 +14,7 @@
             insertPosition: 'before', // before, after, inside
             enableAnalytics: false,// Toggle Google Analytics - will send a custom event for adblock_on or adblock_off
             enableReporting: true,// Toggle reporting of adblocker state to the dashboard
+            previewAdblock: false,
         }, config);
     window.ABB_config = config;
 
@@ -48,12 +51,13 @@
 
     function checkRegions() {
         let adblockEnabled = false;
+        let isPreview = (config.previewAdblock && typeof INSTALL_ID !== "undefined" && INSTALL_ID === 'preview');
         for (let j = 0; j < config.selectors.length; j++) {
             let selector = config.selectors[j];
             let matches = document.querySelectorAll(selector);
             for (let i = 0; i < matches.length; i++) {
                 let match = matches[i];
-                if (isEmpty(match)) {
+                if (isEmpty(match) || isPreview) {
                     placeInRegion(match);
                     adblockEnabled = true;
                 }
