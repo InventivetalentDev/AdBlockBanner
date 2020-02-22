@@ -11,6 +11,7 @@
             delay: 2000,
             insertPosition: 'before', // before, after, inside
             enableAnalytics: false,// Toggle Google Analytics - will send a custom event for adblock_on or adblock_off
+            enableReporting: true,// Toggle reporting of adblocker state to the dashboard
         }, config);
     window.ABB_config = config;
 
@@ -76,6 +77,13 @@
                 }
             }
             ga("send", "event", "AdBlockBanner", adblockEnabled ? "adblock_on" : "adblock_off");
+        }
+
+        if (config.enableReporting) {
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", 'https://abb.inventivetalent.org/report.php', true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.send("host=" + location.hostname + "&path=" + location.pathname + "&adblocker=" + adblockEnabled);
         }
     }
 
