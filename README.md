@@ -22,6 +22,8 @@ Tiny script to detect ad blockers and display a custom message in ad regions
 npm install --save adblockbanner
 ```
 
+### Cloudflare App
+[![Install AdBlockBanner with Cloudflare](https://install.cloudflareapps.com/install-button.png)](https://cloudflare.com/apps/adblockbanner/install?source=button)
 
 ## Configuration
 ```js
