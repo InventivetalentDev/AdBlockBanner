@@ -1,6 +1,6 @@
 {
   "name": "adblockbanner",
-  "version": "1.1.1",
+  "version": "1.2.1",
   "description": "Tiny script to detect ad blockers and display a custom message in ad regions",
   "main": "abb.js",
   "scripts": {
