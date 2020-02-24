@@ -3,6 +3,9 @@ Tiny script to detect ad blockers and display a custom message in ad regions
 
 ![](https://yeleha.co/2u3UPs6)
 
+[Dashboard](https://abb.inventivetalent.org/dashboard)
+![](https://yeleha.co/2VfabFf)
+
 
 ## Installation
 ```html
