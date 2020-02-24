@@ -50,11 +50,12 @@
     }
 
     function checkRegions() {
-        let adblockEnabled = false;
+        let adblockEnabled = null;
         let isPreview = (config.previewAdblock && typeof INSTALL_ID !== "undefined" && INSTALL_ID === 'preview');
         for (let j = 0; j < config.selectors.length; j++) {
             let selector = config.selectors[j];
             let matches = document.querySelectorAll(selector);
+            if (matches.length > 0 && adblockEnabled === null) adblockEnabled = false;
             for (let i = 0; i < matches.length; i++) {
                 let match = matches[i];
                 if (isEmpty(match) || isPreview) {
@@ -73,21 +74,23 @@
     function run() {
         let adblockEnabled = checkRegions();
 
-        if (config.enableAnalytics && typeof ga === "function") {
-            if (ga.hasOwnProperty("getAll")) {// https://stackoverflow.com/a/40761709/6257838
-                let allTrackers = ga.getAll();
-                if (allTrackers && allTrackers.length > 0) {
-                    allTrackers[0].send("event", "AdBlockBanner", adblockEnabled ? "adblock_on" : "adblock_off");
+        if (adblockEnabled !== null) {
+            if (config.enableAnalytics && typeof ga === "function") {
+                if (ga.hasOwnProperty("getAll")) {// https://stackoverflow.com/a/40761709/6257838
+                    let allTrackers = ga.getAll();
+                    if (allTrackers && allTrackers.length > 0) {
+                        allTrackers[0].send("event", "AdBlockBanner", adblockEnabled ? "adblock_on" : "adblock_off");
+                    }
                 }
+                ga("send", "event", "AdBlockBanner", adblockEnabled ? "adblock_on" : "adblock_off");
             }
-            ga("send", "event", "AdBlockBanner", adblockEnabled ? "adblock_on" : "adblock_off");
-        }
 
-        if (config.enableReporting) {
-            let xhr = new XMLHttpRequest();
-            xhr.open("POST", 'https://abb.inventivetalent.org/report.php', true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr.send("host=" + location.hostname + "&path=" + location.pathname + "&adblocker=" + adblockEnabled);
+            if (config.enableReporting) {
+                let xhr = new XMLHttpRequest();
+                xhr.open("POST", 'https://abb.inventivetalent.org/report.php', true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.send("host=" + location.hostname + "&path=" + location.pathname + "&adblocker=" + adblockEnabled);
+            }
         }
     }
 
