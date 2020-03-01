@@ -1,7 +1,7 @@
 (function (window, document) {
-    'use strict'
+    "use strict"
 
-    let config = window.ABB_config || INSTALL_OPTIONS || {};
+    let config = (typeof INSTALL_OPTIONS !== "undefined") ? INSTALL_OPTIONS : (typeof window.ABB_config !== "undefined") ? window.ABB_config : {} || {};
     config = Object.assign({},
         {
             text: "Hi! Please disable your AdBlocker for this site to keep it running, thanks :)", // Text to be displayed
