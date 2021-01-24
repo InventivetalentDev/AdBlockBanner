@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/InventivetalentDev/AdBlockBanner#readme",
   "devDependencies": {
-    "webpack": "4.42.0",
+    "webpack": "4.46.0",
     "webpack-cli": "3.3.10"
   }
 }
